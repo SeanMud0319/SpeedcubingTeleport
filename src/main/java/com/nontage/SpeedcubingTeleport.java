@@ -32,12 +32,14 @@ public final class SpeedcubingTeleport extends JavaPlugin {
         getLogger().info("SpeedcubingTeleport has been disabled!");
         timer.stop();
     }
+
     private void registerCommands() {
-         Objects.requireNonNull(getCommand("tpa")).setExecutor(new tpa());
-         Objects.requireNonNull(getCommand("tpaccept")).setExecutor(new tpaccept());
-         Objects.requireNonNull(getCommand("tpdeny")).setExecutor(new tpdeny());
-         Objects.requireNonNull(getCommand("tpahere")).setExecutor(new tpahere());
+        Objects.requireNonNull(getCommand("tpa")).setExecutor(new tpa());
+        Objects.requireNonNull(getCommand("tpaccept")).setExecutor(new tpaccept());
+        Objects.requireNonNull(getCommand("tpdeny")).setExecutor(new tpdeny());
+        Objects.requireNonNull(getCommand("tpahere")).setExecutor(new tpahere());
     }
+
     private void registerListeners() {
         Bukkit.getPluginManager().registerEvents(new PlayerQuit(), this);
     }
