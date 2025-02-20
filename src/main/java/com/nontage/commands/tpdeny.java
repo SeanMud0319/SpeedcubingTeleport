@@ -9,6 +9,10 @@ import org.bukkit.entity.Player;
 public class tpdeny implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (!(sender instanceof Player player)) {
+            sender.sendMessage("You must be a player to use this command!");
+            return true;
+        }
         if (args.length != 1) {
             sender.sendMessage("§cUsage: /tpdeny <player>");
             return true;
@@ -25,11 +29,11 @@ public class tpdeny implements CommandExecutor {
             return true;
         }
 
-        if (TeleportManager.hasTpaRequest(target.getUniqueId())) {
+        if (TeleportManager.hasTpaRequest(target.getUniqueId(), player.getUniqueId())) {
             TeleportManager.removeTpaRequest(target.getUniqueId());
             sender.sendMessage("§cYou have denied the teleport request from " + target.getName());
             target.sendMessage("§c" + sender.getName() + " has denied your teleport request.");
-        } else if (TeleportManager.hasTpahereRequest(target.getUniqueId())) {
+        } else if (TeleportManager.hasTpahereRequest(target.getUniqueId(), player.getUniqueId())) {
             TeleportManager.removeTpahereRequest(target.getUniqueId());
             sender.sendMessage("§cYou have denied the teleport request from " + target.getName());
             target.sendMessage("§c" + sender.getName() + " has denied your teleport request.");

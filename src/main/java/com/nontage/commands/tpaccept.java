@@ -31,13 +31,22 @@ public class tpaccept implements CommandExecutor {
             return true;
         }
 
-        if (TeleportManager.hasTpaRequest(target.getUniqueId())) {
+        //tpa
+        if (TeleportManager.hasTpaRequest(target.getUniqueId(), player.getUniqueId())) {
             TeleportManager.removeTpaRequest(target.getUniqueId());
-            player.teleport(target);
+            target.teleport(player);
             player.sendMessage("§aTeleported to " + target.getName());
-        } else {
-            player.sendMessage("§cYou don't have any pending teleport requests from " + target.getName());
+            return true;
         }
+        //tpahere
+        if (TeleportManager.hasTpahereRequest(target.getUniqueId(), player.getUniqueId())) {
+            TeleportManager.removeTpahereRequest(target.getUniqueId());
+            player.teleport(target);
+            player.sendMessage("§aTeleported " + target.getName() + " to you");
+            target.sendMessage("§aTeleported to " + player.getName());
+            return true;
+        }
+        player.sendMessage("§cYou don't have any pending teleport requests from " + target.getName());
         return true;
     }
 }

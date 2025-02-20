@@ -30,12 +30,8 @@ public class tpahere implements CommandExecutor {
             return true;
         }
 
-        if (TeleportManager.hasTpaRequest(player.getUniqueId(), target.getUniqueId())) {
-            player.sendMessage("§cYou already have a pending teleport request to " + target.getName());
-            return true;
-        }
-
-        if (TeleportManager.hasTpahereRequest(player.getUniqueId(), target.getUniqueId())) {
+        if (TeleportManager.hasTpaRequest(player.getUniqueId(), target.getUniqueId()) ||
+                TeleportManager.hasTpaRequest(target.getUniqueId(), player.getUniqueId())) {
             player.sendMessage("§cYou already have a pending teleport request to " + target.getName());
             return true;
         }
