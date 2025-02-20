@@ -1,0 +1,34 @@
+name: SpeedcubingTeleport
+version: '1.0-SNAPSHOT'
+main: com.nontage.SpeedcubingTeleport
+api-version: '1.21'
+authors: [ Nontage ]
+commands:
+  tpa:
+    usage: /tpa
+    permission: speedcubingteleport.tpa
+  tpaccept:
+    usage: /tpaccept
+    permission: speedcubingteleport.tpaccept
+    aliases: [tpyes]
+  tpdeny:
+    usage: /tpdeny
+    permission: speedcubingteleport.tpdeny
+    aliases: [tpno]
+  tpahere:
+    usage: /tpahere
+    permission: speedcubingteleport.tpahere
+
+permissions:
+  speedcubingteleport.tpa:
+    description: Allows the player to request a teleport to another player.
+    default: op
+  speedcubingteleport.tpaccept:
+    description: Allows the player to accept a teleport request.
+    default: op
+  speedcubingteleport.tpdeny:
+    description: Allows the player to deny a teleport request.
+    default: op
+  speedcubingteleport.tpahere:
+    description: Allows the player to request a teleport to another player's location.
+    default: op
