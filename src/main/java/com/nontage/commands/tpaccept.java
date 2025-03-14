@@ -1,5 +1,6 @@
 package com.nontage.commands;
 
+import com.nontage.utils.ServerUtils;
 import com.nontage.utils.TeleportManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -30,23 +31,43 @@ public class tpaccept implements CommandExecutor {
             player.sendMessage("§cYou can't accept to yourself!");
             return true;
         }
-
-        //tpa
-        if (TeleportManager.hasTpaRequest(target.getUniqueId(), player.getUniqueId())) {
-            TeleportManager.removeTpaRequest(target.getUniqueId());
-            target.teleport(player);
-            player.sendMessage("§aTeleported to " + target.getName());
+        //Bukkit (btw i hate folia)
+        if (!ServerUtils.isFolia) {
+            //tpa
+            if (TeleportManager.hasTpaRequest(target.getUniqueId(), player.getUniqueId())) {
+                TeleportManager.removeTpaRequest(target.getUniqueId());
+                target.teleport(player);
+                player.sendMessage("§aTeleported to " + target.getName());
+                return true;
+            }
+            //tpahere
+            if (TeleportManager.hasTpahereRequest(target.getUniqueId(), player.getUniqueId())) {
+                TeleportManager.removeTpahereRequest(target.getUniqueId());
+                player.teleport(target);
+                player.sendMessage("§aTeleported " + target.getName() + " to you");
+                target.sendMessage("§aTeleported to " + player.getName());
+                return true;
+            }
+            player.sendMessage("§cYou don't have any pending teleport requests from " + target.getName());
+            return true;
+        } else {
+            //tpa
+            if (TeleportManager.hasTpaRequest(target.getUniqueId(), player.getUniqueId())) {
+                TeleportManager.removeTpaRequest(target.getUniqueId());
+                target.teleportAsync(player.getLocation());
+                player.sendMessage("§aTeleported to " + target.getName());
+                return true;
+            }
+            //tpahere
+            if (TeleportManager.hasTpahereRequest(target.getUniqueId(), player.getUniqueId())) {
+                TeleportManager.removeTpahereRequest(target.getUniqueId());
+                player.teleportAsync(target.getLocation());
+                player.sendMessage("§aTeleported " + target.getName() + " to you");
+                target.sendMessage("§aTeleported to " + player.getName());
+                return true;
+            }
+            player.sendMessage("§cYou don't have any pending teleport requests from " + target.getName());
             return true;
         }
-        //tpahere
-        if (TeleportManager.hasTpahereRequest(target.getUniqueId(), player.getUniqueId())) {
-            TeleportManager.removeTpahereRequest(target.getUniqueId());
-            player.teleport(target);
-            player.sendMessage("§aTeleported " + target.getName() + " to you");
-            target.sendMessage("§aTeleported to " + player.getName());
-            return true;
-        }
-        player.sendMessage("§cYou don't have any pending teleport requests from " + target.getName());
-        return true;
     }
 }

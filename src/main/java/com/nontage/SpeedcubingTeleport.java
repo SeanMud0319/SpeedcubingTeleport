@@ -5,7 +5,8 @@ import com.nontage.commands.tpaccept;
 import com.nontage.commands.tpahere;
 import com.nontage.commands.tpdeny;
 import com.nontage.listeners.PlayerQuit;
-import com.nontage.utils.BukkitTimer;
+import com.nontage.utils.TeleportTimer;
+import com.nontage.utils.ServerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -13,14 +14,15 @@ import java.util.Objects;
 
 public final class SpeedcubingTeleport extends JavaPlugin {
     public static SpeedcubingTeleport plugin;
-    private BukkitTimer timer;
+    private TeleportTimer timer;
 
     @Override
     public void onEnable() {
         getLogger().info("SpeedcubingTeleport has been enabled!");
         getLogger().info("Author: Nontage");
+        ServerUtils.init();
         plugin = this;
-        timer = new BukkitTimer();
+        timer = new TeleportTimer();
         timer.start();
         registerCommands();
         registerListeners();

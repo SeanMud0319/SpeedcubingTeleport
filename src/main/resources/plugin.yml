@@ -3,6 +3,7 @@ version: '1.0-SNAPSHOT'
 main: com.nontage.SpeedcubingTeleport
 api-version: '1.21'
 authors: [ Nontage ]
+folia-supported: true
 commands:
   tpa:
     usage: /tpa
